@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+  db:
+    container_name: tunetangotron_db_container
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: passwordr
+      MYSQL_DATABASE: tunetangotron
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - tunetangotron-db:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      # PMA_ARBITRARY: 1 # Uncomment to enable arbitrary server connection
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    restart: always
+
+volumes:
+  tunetangotron-db:
