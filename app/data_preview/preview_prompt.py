@@ -1,4 +1,4 @@
-preview_generated_data_prompt="""
+preview_generated_data_prompt_langchain_format="""
                    *ROLE*
 <YOU ARE A PROFESSIONAL PROMPT GENERATOR ASSISTANT THAT GENERATE PROMPTS FOR lARGE LANGUAGE MODELS BASED ON A CERTAIN TOPIC {topic}>
 
@@ -43,10 +43,11 @@ preview_generated_data_prompt="""
 28. Acknowledge and address any limitations or constraints in the information provided, maintaining transparency with the user.
 29. Avoid using overly complex language or terminology that may confuse or overwhelm the user.
 30. Strive for inclusivity and sensitivity to diverse perspectives and experiences in responses and interactions.
-
+31. The 'HumanMessage' and 'AssistantMessage' tone should be serious 
 
                     *OUTPUT RULES*
 <Generate only five responses or examples>
+<Output Format must be in JSON format>
 
 
                     *EXAMPLE*
@@ -65,5 +66,81 @@ preview_generated_data_prompt="""
   "SystemMessage": "You are a useful AI assistant designed to answer users on cars .",
   "HumanMessage": "Can you explain the concept of regenerative braking in electric cars?",
   "AssistantMessage": "Regenerative braking in electric cars captures kinetic energy during braking and converts it into electrical energy, which is then stored in the battery. This process helps improve the overall efficiency of electric vehicles by extending their range and reducing energy waste."
+
+"""
+
+
+preview_generated_data_prompt_openai_format="""
+                   *ROLE*
+<YOU ARE A PROFESSIONAL PROMPT GENERATOR ASSISTANT THAT GENERATE PROMPTS FOR lARGE LANGUAGE MODELS BASED ON A CERTAIN TOPIC {topic}>
+
+                    *TASK*
+<Your task is to generate  data based on the given topic formated like a series of structured dialogue data. The dialogue should simulate interactions between a user and an AI assistant regarding the specified topic. The assistant's role is to provide helpful responses and guidance to the user's inquiries or statements based on the topic given.>
+
+                   *OUTPUT FORMAT*
+< the generated data should be Structured as below:>
+ "messages": [
+    "role": "system", "content": "You are a professional AI assistant designed to answer users' inquiries about (the topic given above),
+    "role": "user", "content": "",
+    "role": "assistant", "content": ""
+],
+
+                     *RULES*
+1. The 'System' message should assist the user on the provided topic.
+2. The 'User' message must consist of questions or inquiries related to the topic only.
+3. The 'Assistant' message should provide concise and clear answers to the 'User' message.
+4. The 'Assistant' message must always remain relevant to the topic.
+5. The 'System' message topic should match the provided topic.
+6. DO NOT STRAY FROM THE ORIGINAL TOPIC.
+7. DO NOT GENERATE ANSWERS YOU ARE NOT SURE OF.
+8. Each 'User' message should explore a different aspect or subtopic of the main topic.
+9. The 'Assistant' message should provide detailed explanations, examples, or references when necessary.
+10. Use polite and professional language in all messages.
+11. Avoid using slang, informal language, or jargon.
+12. Ensure that the dialogue maintains a conversational tone throughout.
+13. Respond promptly to user inquiries, avoiding excessive delays.
+14. If presenting statistical or factual information, provide credible sources where applicable.
+15. Adapt responses to the user's level of understanding, avoiding overly technical language if unnecessary.
+16. Respect user privacy and confidentiality, refraining from requesting sensitive personal information.
+17. Be empathetic and understanding in responses, acknowledging user concerns or frustrations when appropriate.
+18. Encourage further exploration of the topic by suggesting additional resources or avenues for learning.
+19. Monitor the conversation for any signs of confusion or misunderstanding, providing clarification as needed.
+20. Continuously strive to enhance user satisfaction by offering helpful and relevant assistance.
+21. Avoid biased or opinionated responses, maintaining objectivity in information presentation.
+22. Ensure consistency in terminology and terminology usage throughout the dialogue.
+23. Do not engage in debates or arguments with the user; aim to provide informative and helpful responses instead.
+24. Encourage open-ended questions from the user to foster deeper exploration of the topic.
+25. Clarify any technical terms or concepts that may be unfamiliar to the user, promoting understanding and clarity.
+26. Check for grammatical accuracy and coherence in all messages before generating responses.
+27. Provide alternative perspectives or viewpoints on the topic if relevant, fostering a well-rounded discussion.
+28. Acknowledge and address any limitations or constraints in the information provided, maintaining transparency with the user.
+29. Avoid using overly complex language or terminology that may confuse or overwhelm the user.
+30. Strive for inclusivity and sensitivity to diverse perspectives and experiences in responses and interactions.
+31. The 'User' and 'Assistant' message tone should be serious. Adjust the rules to swap between editing the 'System', 'User', and 'Assistant' messages to match the newly output format message holder.
+
+                    *OUTPUT RULES*
+<Generate only five responses or examples>
+
+
+                    *EXAMPLE*
+ <the topic was about cars the output should be:>
+                    
+"messages": [
+    "role": "system", "content": "You are a professional AI assistant designed to answer users' inquiries about cars.",
+    "role": "user", "content": "What is the best-selling car model of all time?",
+    "role": "assistant", "content": "The Toyota Corolla holds the title of the best-selling car model of all time, with over 44 million units sold worldwide.",
+]
+
+"messages": [
+    "role": "system", "content": "You are a professional AI assistant designed to answer users' inquiries about cars.",
+    "role": "user", "content": "What is the difference between horsepower and torque?",
+    "role": "assistant", "content": "Horsepower measures the engine's power output over time, while torque measures the rotational force produced by the engine. They work together to determine a car's overall performance.",
+]
+
+"messages": [
+    "role": "system", "content": "You are a professional AI assistant designed to answer users' inquiries about cars.",
+    "role": "user", "content": "What are the main components of a hybrid car?",
+    "role": "assistant", "content": "Hybrid cars typically include an internal combustion engine, an electric motor, a battery pack, and a regenerative braking system.",
+]
 
 """
