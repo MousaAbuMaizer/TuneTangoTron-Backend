@@ -17,7 +17,7 @@ def initialize_azure_chat_openai():
     try:
         azure_llm = AzureChatOpenAI(
             api_key=os.getenv('AZURE_API_KEY'),
-            model="gpt-4",
+            model="gpt-4-1106-preview",
             openai_api_version="2023-07-01-preview",
             azure_endpoint=os.getenv('AZURE_ENDPOINT'),
             temperature=0.55
