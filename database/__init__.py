@@ -1,5 +1,5 @@
 from database.database import SqlAlchemyDatabaseConnection
-from database.models.models import *
+from database.models import *
 from database.cruds.user_crud import UserCRUD
 
 # Initialize the database connection
@@ -16,4 +16,4 @@ if (sql_database_connection.get_session().query(User).count() == 0):
     USER_CRUD = UserCRUD(sql_database_connection)
     
     # Add a user to the database
-    USER_CRUD.add("VidJalsa","1234")
+    USER_CRUD.add("hamza","1234")

@@ -1,48 +1,48 @@
-# userCrud.py
+# savedFileCrud.py
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from  database.database import AbstractDatabase
-from  database.models.models import User
-from  database.cruds.crud_interface import ICRUD
+from database.database import AbstractDatabase
+from database.models.saved_file import SavedFile
+from database.cruds.crud_interface import ICRUD
 
 
-class UserCRUD(ICRUD):
+class SavedFileCRUD(ICRUD):
     def __init__(self, db: AbstractDatabase):
         self.db = db
 
-    def add(self, username: str, password_hash: str) -> User:
+    def add(self, file_address: str, user_id: int) -> SavedFile:
         session: Session = self.db.get_session()
-        new_user = User(username=username, password_hash=password_hash)
+        new_saved_file = SavedFile(file_address=file_address, user_id=user_id)
         try:
-            session.add(new_user)
+            session.add(new_saved_file)
             session.commit()
-            return new_user
+            return new_saved_file
         except SQLAlchemyError as e:
             session.rollback()
             raise e
         finally:
             self.db.close_session(session)
 
-    def get(self, user_id: int) -> User:
+    def get(self, saved_file_id: int) -> SavedFile:
         session: Session = self.db.get_session()
         try:
-            user = session.query(User).filter(User.id == user_id).first()
-            return user
+            saved_file = session.query(SavedFile).filter(SavedFile.id == saved_file_id).first()
+            return saved_file
         except SQLAlchemyError as e:
             raise e
         finally:
             self.db.close_session(session)
 
-    def update(self, user_id: int, **kwargs) -> User:
+    def update(self, saved_file_id: int, **kwargs) -> SavedFile:
         session: Session = self.db.get_session()
         try:
-            user = session.query(User).filter(User.id == user_id).first()
-            if user:
+            saved_file = session.query(SavedFile).filter(SavedFile.id == saved_file_id).first()
+            if saved_file:
                 for key, value in kwargs.items():
-                    setattr(user, key, value)
+                    setattr(saved_file, key, value)
                 session.commit()
-                return user
+                return saved_file
             return None
         except SQLAlchemyError as e:
             session.rollback()
@@ -50,12 +50,12 @@ class UserCRUD(ICRUD):
         finally:
             self.db.close_session(session)
 
-    def delete(self, user_id: int) -> bool:
+    def delete(self, saved_file_id: int) -> bool:
         session: Session = self.db.get_session()
         try:
-            user = session.query(User).filter(User.id == user_id).first()
-            if user:
-                session.delete(user)
+            saved_file = session.query(SavedFile).filter(SavedFile.id == saved_file_id).first()
+            if saved_file:
+                session.delete(saved_file)
                 session.commit()
                 return True
             return False
