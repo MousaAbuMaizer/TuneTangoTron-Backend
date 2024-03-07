@@ -19,7 +19,7 @@ async def generate_example_prompts(topic: str):
     return prompt_preview.Generate_example_data(topic)
 
 @app.post("/api/v2/generate_data")
-async def generate_example_prompts(topic: str,number_records:int):
+async def generate_DataSet(topic: str,number_records:int):
     prompt_preview = Prompt_Preview()
-    return prompt_preview.Generate_example_data(topic,number_records)
+    return prompt_preview.Generate_data(topic,number_records)
 
