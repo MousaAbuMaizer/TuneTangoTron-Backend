@@ -1,7 +1,7 @@
 from database.cruds.crud_interface import ICRUD
 from fastapi import HTTPException
 from services.encrypt_service import EncryptService 
-from dto import user_dto
+from database.data_transfer_object import user_dto
 
 class LoginService:
     def __init__(self, crud_service: ICRUD):

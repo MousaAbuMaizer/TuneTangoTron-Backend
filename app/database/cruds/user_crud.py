@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from database.database import AbstractDatabase
 from database.models.user import User
 from database.cruds.crud_interface import ICRUD
-from dto.user_dto import UserDTO
+from database.data_transfer_object.user_dto import UserDTO
 from typing import Optional, Union
 
 class UserCRUD(ICRUD):

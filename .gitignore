@@ -2,3 +2,6 @@ __pycache__/
 /.venv/
 /.vscode/
 /.idea/
+/app/config.ini
+/.env
+/app/config.py
