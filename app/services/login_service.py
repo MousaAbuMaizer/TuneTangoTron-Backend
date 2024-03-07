@@ -1,20 +1,20 @@
 from database.cruds.crud_interface import ICRUD
 from fastapi import HTTPException
 from services.encrypt_service import EncryptService 
-from database.data_transfer_object import user_dto
+from database.data_transfer_object.user_dto import UserDTO
 
 class LoginService:
     def __init__(self, crud_service: ICRUD):
         self.crud_service = crud_service
 
-    def login(self, username: str, password: str) -> bool:
+    def login(self, username: str, password: str) -> UserDTO:
         try:
             user_dto = self.crud_service.get(username)
             # if user_dto is None or not EncryptService.checkPassword(input_password=password,stored_hashed_password= user_dto.password_hash):
             #     raise HTTPException(status_code=401, detail="Invalid username or password")
             if(user_dto is None or not (password == user_dto.password_hash)):
                 raise HTTPException(status_code=401, detail="Invalid username or password")
-            return True
+            return user_dto
             # Successful login logic here (if needed)
         except Exception as e:
             # Log the error

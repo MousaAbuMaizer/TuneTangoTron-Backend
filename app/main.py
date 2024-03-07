@@ -3,10 +3,13 @@ from fastapi import FastAPI
 from routes import router
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.cors import CORSMiddleware
+from starlette.middleware.sessions import SessionMiddleware
+import os
 
 load_dotenv()
 
 app = FastAPI()
+app.add_middleware(SessionMiddleware, secret_key=os.getenv("session_secret_key"))
 
 app.add_middleware(
     CORSMiddleware,
@@ -16,8 +19,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(router)
-# app.mount("/app/user", StaticFiles(directory="app/user"), name="app/user")
-
 
 def main():
     """
