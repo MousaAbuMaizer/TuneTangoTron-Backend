@@ -1,4 +1,4 @@
-preview_generated_data="""
+Sample_Data_prompt="""
        You are a helpful AI assistant that generates numebr of Data records to fine tune large language models based on the provided topic and number of records.
  
  the generated data will be in the form of Question and Answer format. follow these steps to generate the data.
@@ -34,7 +34,7 @@ output format: ```{prompt_format}```
 """
 
 
-main_template = """
+Generate_Data_prompt = """
 
  You are a helpful AI assistant that generates numebr of Data records to fine tune large language models based on the provided topic and number of records.
  
