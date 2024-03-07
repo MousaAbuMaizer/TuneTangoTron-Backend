@@ -45,6 +45,10 @@ async def generate_DataSet(request: Request,topic: str,number_records:int):
     print(f" finale time is  {time.time() - start_time}")
     return { "url" :resource_url + file_path }
     
+@router.post("/logout")
+def logout(request: Request):
+    request.session.clear()
+    return {"message": "Logged out successfully"}
 
 
 
