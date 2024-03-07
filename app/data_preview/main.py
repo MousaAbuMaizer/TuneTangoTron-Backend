@@ -13,7 +13,13 @@ app.add_middleware(
 )
 
 
-@app.post("/api/v1/generate_example_prompts")
+@app.post("/api/v2/generate_example_prompts")
 async def generate_example_prompts(topic: str):
     prompt_preview = Prompt_Preview()
     return prompt_preview.Generate_example_data(topic)
+
+@app.post("/api/v2/generate_data")
+async def generate_example_prompts(topic: str,number_records:int):
+    prompt_preview = Prompt_Preview()
+    return prompt_preview.Generate_example_data(topic,number_records)
+

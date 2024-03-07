@@ -43,4 +43,30 @@ class Prompt_Preview:
 
             except HTTPException as e:
                  raise HTTPException(status_code=400, detail="There was an error while generating your Data'.")
+            
+    def Generate_data(self, topic: str,number_records:int):
+ 
+    # Define the mapping of the format of the prompt to the function that will generate the prompt.
+
+        output_parser = JsonOutputParser(pydantic_object=LangChainSchema)
+        preview_prompt = PromptTemplate(template=main_template, input_variables=["topic",'number_records'],
+                                        partial_variables={"prompt_format":output_parser.get_format_instructions()})
+        previewed_data_chain = preview_prompt | azure_llm | output_parser 
+
+        try:
+            preview_prompt_response = previewed_data_chain.invoke({'topic': topic,"number_records":number_records})
+            #preview_prompt_formated_response = preview_prompt_response.replace('\\n', '\n')
+            print(preview_prompt_response)
+            return preview_prompt_response
+            # Convert the response to a JSON object
+            #json_response = json.dumps(preview_prompt_formated_response)
+            #print(json_response)
+            #return json_response
+            
+
+        except HTTPException as e:
+                raise HTTPException(status_code=400, detail="There was an error while generating your Data'.")
+        
+        
+
         
