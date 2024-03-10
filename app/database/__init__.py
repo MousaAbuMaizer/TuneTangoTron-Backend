@@ -22,5 +22,5 @@ if (sql_database_connection.get_session().query(User).count() == 0):
     USER_CRUD = UserCRUD(sql_database_connection)
     
     # Add a user to the database
-    # hash password to ease testing 
-    USER_CRUD.add("hamza","1234")
+    # hash password to ease testing ( password is '1234' )
+    USER_CRUD.add("hamza","03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4")
