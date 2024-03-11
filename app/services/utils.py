@@ -43,3 +43,4 @@ def save_output_to_json(output, folder_path='GeneratedData', file_name ='Generat
     # Write the output to a JSON file
     with open(file_path, 'w') as json_file:
         json.dump(output, json_file, indent=4)
+
