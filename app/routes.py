@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, Request
-from schemes import GenerateRequest, LoginRequest, TopicRequest
+from router_schemes import GenerateRequest, LoginRequest, TopicRequest
 from services.data_preview.prompt_preview_class import Prompt_Preview,preview_prompts_v2
 from services import azure_blob_uloader_instance
 from services.utils import convertJsonToBytes , generate_timestamp
@@ -45,23 +45,23 @@ async def generate_dataSet(request: GenerateRequest):
     azure_blob_uloader_instance.upload_files(file_path, json_file_bytes)
     return {"url": resource_url + file_path}
 
-# Endpoint for generating example prompts
-@router.post("/api/v3/generate_example_data_v2")
-async def generate_data_samples(request: TopicRequest):
-    prompt_preview = preview_prompts_v2()
-    # if data_format not in ['ChatgptSchema', 'LangChainSchema']:
-    #     raise HTTPException(status_code=400, detail="Invalid data_format. Choose either 'ChatgptSchema' or 'LangChainSchema'")
+# # Endpoint for generating example prompts
+# @router.post("/api/v3/generate_example_data_v2")
+# async def generate_data_samples(request: TopicRequest):
+#     prompt_preview = preview_prompts_v2()
+#     # if data_format not in ['ChatgptSchema', 'LangChainSchema']:
+#     #     raise HTTPException(status_code=400, detail="Invalid data_format. Choose either 'ChatgptSchema' or 'LangChainSchema'")
     
-    return prompt_preview.Generate_example_data_v2(request.topic,'LangChainSchema')
+#     return prompt_preview.Generate_example_data_v2(request.topic,'LangChainSchema')
 
-# Endpoint for generating data set
-@router.post("/api/v3/generate_data_v2")
-async def generate_DataSet_v2(request: GenerateRequest):
-    prompt_preview = preview_prompts_v2()
-    # if data_format not in ['ChatgptSchema', 'LangChainSchema']:
-    #     raise HTTPException(status_code=400, detail="Invalid data_format. Choose either 'ChatgptSchema' or 'LangChainSchema'")
+# # Endpoint for generating data set
+# @router.post("/api/v3/generate_data_v2")
+# async def generate_DataSet_v2(request: GenerateRequest):
+#     prompt_preview = preview_prompts_v2()
+#     # if data_format not in ['ChatgptSchema', 'LangChainSchema']:
+#     #     raise HTTPException(status_code=400, detail="Invalid data_format. Choose either 'ChatgptSchema' or 'LangChainSchema'")
     
-    return prompt_preview.Generate_data_v2(request.topic, request.number_records,'LangChainSchema')
+#     return prompt_preview.Generate_data_v2(request.topic, request.number_records,'LangChainSchema')
 
 # @router.post("/logout")
 # def logout(session_request: Request):
