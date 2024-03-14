@@ -1,5 +1,5 @@
 from langchain_core.pydantic_v1 import BaseModel, Field, validator
-from typing import List
+from typing import List, Optional
 
 class LangChainSchema(BaseModel):
     SystemMessage: str = Field(
@@ -13,6 +13,6 @@ class LangChainSchema(BaseModel):
     )
 
 class LangChainArraySchema(BaseModel):
-    items: List[LangChainSchema] = Field(
-        ..., description="An array of LangChainSchema objects."
+    items: Optional[List[LangChainSchema] ]= Field(
+        None, description="An array of LangChainSchema objects."
     )
