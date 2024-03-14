@@ -1,8 +1,8 @@
 from langchain_openai import AzureChatOpenAI
 from langchain.output_parsers import PydanticOutputParser
 from langchain.prompts import PromptTemplate
-from llm_schemas.langchain_schema import LangChainArraySchema , LangChainSchema
-from prompt import full_data_generation_template
+from llm.llm_schemas.langchain_schema import LangChainArraySchema , LangChainSchema
+from llm.prompt import full_data_generation_template
 from langchain.globals import set_debug
 set_debug(True)
 from langchain.globals import set_verbose
@@ -26,6 +26,7 @@ class GenerateSyntheticData:
         preview_prompt_response = previewed_data_chain.invoke(
             {'topic': topic, 'instructions': instructions, 'prefix': prefix, 'number_of_records': number_of_records,
              'example': example})
-
+        
         print(preview_prompt_response)
+        return preview_prompt_response
 

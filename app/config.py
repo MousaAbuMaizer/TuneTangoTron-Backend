@@ -1,5 +1,5 @@
 import configparser
-from langchain_openai import AzureOpenAI
+from langchain_openai import AzureOpenAI , AzureChatOpenAI
 from dotenv import load_dotenv
 import os
 load_dotenv()
@@ -17,3 +17,11 @@ AZURE_BLOB_CONN = os.getenv("AZURE_BLOB_CONN")
 AZURE_BLOB_CONTAINER_NAME = os.getenv("AZURE_BLOB_CONTAINER_NAME")
 resource_url = os.getenv("resource_url")
 azure_llm = AzureOpenAI(api_key= AZURE_API_KEY, azure_endpoint= AZURE_ENDPOINT, api_version="2023-07-01-preview", temperature= 0.6)
+
+azure_chat_llm = AzureChatOpenAI(
+    api_key=AZURE_API_KEY,
+    model="gpt-4-1106-preview",
+    openai_api_version="2023-07-01-preview",
+    azure_endpoint=AZURE_ENDPOINT,
+    temperature=0.55
+)
