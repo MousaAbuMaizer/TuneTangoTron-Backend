@@ -6,6 +6,7 @@ from services.utils import convertJsonToBytes , generate_timestamp
 from database import saved_file_crud_sql_instance
 from services import login_service_instance
 from config import resource_url
+from services.llm_service import LLMGenerateService
 
 # from fastapi.responses import StreamingResponse
 # import time
@@ -44,6 +45,22 @@ async def generate_dataSet(request: GenerateRequest):
     saved_file_crud_sql_instance.add(file_path, 1)
     azure_blob_uloader_instance.upload_files(file_path, json_file_bytes)
     return {"url": resource_url + file_path}
+
+
+# @router.post("/api/v2/generate_data")
+# async def generate_dataSet(request: GenerateRequest):
+#     llm_generate_service = LLMGenerateService()
+#     llm_generate_service.generate_data()
+#     json_file = prompt_preview.Generate_data(request.topic, request.number_records)
+#     json_file_bytes = convertJsonToBytes(json_file)
+#     # file_path = session_request.session.get('username') + generate_timestamp() + ".json"
+#     file_path = "hamza" + generate_timestamp() + ".json"
+#     # saved_file_crud_sql_instance.add(file_path, session_request.session.get('user_id'))
+#     saved_file_crud_sql_instance.add(file_path, 1)
+#     azure_blob_uloader_instance.upload_files(file_path, json_file_bytes)
+#     return {"url": resource_url + file_path}
+
+
 
 # # Endpoint for generating example prompts
 # @router.post("/api/v3/generate_example_data_v2")
