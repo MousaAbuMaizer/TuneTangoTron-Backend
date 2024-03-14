@@ -3,10 +3,10 @@ from langchain.output_parsers import PydanticOutputParser
 from langchain.prompts import PromptTemplate
 from llm_schemas.langchain_schema import LangChainArraySchema , LangChainSchema
 from prompt import full_data_generation_template
-# from langchain.globals import set_debug
-# set_debug(True)
-# from langchain.globals import set_verbose
-# set_verbose(True)
+from langchain.globals import set_debug
+set_debug(True)
+from langchain.globals import set_verbose
+set_verbose(True)
 
 
 class GenerateSyntheticData:
