@@ -28,5 +28,5 @@ class GenerateSyntheticData:
              'example': example})
         
         print(preview_prompt_response)
-        return preview_prompt_response
+        return preview_prompt_response.json()
 
