@@ -1,7 +1,8 @@
 
 from llm.llm_class import GenerateSyntheticData 
 from config import azure_chat_llm
-
+from llm import convert_schemas_service
+import json 
 class LLMGenerateService:
 
 
@@ -13,9 +14,22 @@ class LLMGenerateService:
             json_file = generate_synthetic_data.generate_data(topic, instructions, prefix, example, number_of_records)
             return json_file
         elif data_format == 'ChatgptSchema':
-            pass       
+            json_file = generate_synthetic_data.generate_data(topic, instructions, prefix, example, number_of_records)
+            print("fahed")
+            print(type(json.loads(json_file)))
+            print("fahed")
+            return self.convert_output(json.loads(json_file)['messages'], convert_schemas_service.generate_openai_record)       
         elif data_format == 'SharegptSchema':
-            pass
+            json_file = generate_synthetic_data.generate_data(topic, instructions, prefix, example, number_of_records)
+            return self.convert_output(json.loads(json_file)['messages'], convert_schemas_service.generate_sharegpt_record) 
         elif data_format == 'custom':
             json_file = generate_synthetic_data.generate_custome_data(topic, instructions, prefix, example, number_of_records)
             return json_file
+        
+
+    def convert_output(self,items, function):
+        records = []
+        for item in items:
+            record = function(item["SystemMessage"], item["HumanMessage"], item["AssistantMessage"])
+            records.append(record)
+        return records

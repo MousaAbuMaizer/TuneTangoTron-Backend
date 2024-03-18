@@ -51,7 +51,7 @@ async def generate_dataSet(request: GenerateRequest):
     """
     topic = "history"
     prefix = "nan"
-    format = "LangChainSchema"
+    format = "SharegptSchema"
 
     # json_file =llm_generate_service.generate_data(
     #     request.topic,
@@ -62,13 +62,25 @@ async def generate_dataSet(request: GenerateRequest):
     #     request.formatChoice
     # )
 
+    # json_file =llm_generate_service.generate_data(
+    #     topic,
+    #     intructions,
+    #     prefix,
+    #     example,
+    #     5,
+    #     format
+    # )
+
+
     json_file =llm_generate_service.generate_data(
-        topic,
-        intructions,
-        prefix,
-        example,
+        request.topic,
+        """the dataset should have Systemmessage, HumanMessage and AssistantMessage. the SystemMessage should be "you are a useful chatbot requeired to answer questions about the history of the world" and the HumanMessage should the a query about the history of the world  and the AssistantMessage is the bot response on that query.""",
+        "nan",
+        """ {"SystemMessage": " you are a useful chatbot requeired to answer questions about the history of the world", 
+    "HumanMessage": "what is the history of the world", 
+    "AssistantMessage": "The history of the world is the history of humanity, as determined from archaeology, anthropology, genetics, linguistics, and other disciplines; and, for periods since the invention of writing, from recorded history and from secondary sources and studies."} """,
         5,
-        format
+        request.formatChoice
     )
 
     json_file_bytes = convertJsonToBytes(json_file)
