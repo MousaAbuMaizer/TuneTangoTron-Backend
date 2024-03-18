@@ -1,5 +1,10 @@
 import json
 from datetime import datetime
+import os
+from output_schemes.langchain_scheme import LangChainSchema 
+from output_schemes.chatgpt_scheme import ChatgptSchema
+from langchain_core.output_parsers import JsonOutputParser
+
 
 def convertJsonToBytes(json_obj):
     json_str = json.dumps(json_obj)
@@ -9,11 +14,6 @@ def convertJsonToBytes(json_obj):
 def generate_timestamp():
     return datetime.now().strftime("%Y%m%d_%H%M%S")
 
-import os
-import json
-from output_schemes.langchain_scheme import LangChainSchema 
-from output_schemes.chatgpt_scheme import ChatgptSchema
-from langchain_core.output_parsers import JsonOutputParser
 
 def choose_output_parser(data_format):
     if data_format == 'LangChainSchema':
